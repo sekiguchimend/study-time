@@ -1,8 +1,16 @@
-"use client"
+"use client";
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import styles from './DeviationScoreCalculator.module.css';
 
+// 科目の型定義
+type Subjects = '国語' | '数学' | '理科' | '社会' | '英語';
+
+// 学年の型定義
+type Grade = 1 | 2 | 3;
+
+// 計算機コンポーネント
 const DeviationScoreCalculator: React.FC = () => {
+    // 状態管理
     const [currentGrade, setCurrentGrade] = useState<Grade>(2);
     const [weekdays, setWeekdays] = useState<{ [key in Subjects]: number }>({
         国語: 2,
@@ -40,6 +48,20 @@ const DeviationScoreCalculator: React.FC = () => {
         英語: null,
     });
 
+    // 偏差値計算ロジック (仮の計算式)
+    const calculateAdjustedDeviationScore = (
+        grade: Grade,
+        subject: Subjects,
+        weekdayHours: number,
+        weekendHours: number,
+        previousScore: number,
+        firstYearScore: number | null
+    ): number => {
+        // ここに実際の計算ロジックを記述する
+        return (previousScore + weekdayHours + weekendHours + (firstYearScore ?? 0)) / 4;
+    };
+
+    // フォーム送信時の処理
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const newResults: { [key in Subjects]: number } = {
@@ -87,6 +109,7 @@ const DeviationScoreCalculator: React.FC = () => {
         setResults(newResults);
     };
 
+    // 入力フォームの変更をハンドリング
     const handleInputChange = (
         e: ChangeEvent<HTMLInputElement>,
         subject: Subjects,
