@@ -117,7 +117,7 @@ const DeviationScoreCalculator: React.FC = () => {
 
     return (
         <div className="container">
-            <h2 className="title">五教科偏差値計算機</h2>
+            <h2 className="title">未来の偏差値計算機</h2>
             <form className="form" onSubmit={handleSubmit}>
                 <select 
                     className="select"
@@ -132,7 +132,7 @@ const DeviationScoreCalculator: React.FC = () => {
                     <div className="subject-section" key={subject}>
                         <h3 className="subject-title">{subject}</h3>
                         <div className="input-group">
-                            <label className="label">平日の勉強時間：</label>
+                            <label className="label">平日の一日の勉強時間：</label>
                             <input 
                                 className="time-input"
                                 type="number" 
@@ -153,7 +153,7 @@ const DeviationScoreCalculator: React.FC = () => {
                             分
                         </div>
                         <div className="input-group">
-                            <label className="label">休日の勉強時間：</label>
+                            <label className="label">休日の一日の勉強時間：</label>
                             <input 
                                 className="time-input"
                                 type="number" 
@@ -174,7 +174,7 @@ const DeviationScoreCalculator: React.FC = () => {
                             分
                         </div>
                         <div className="input-group">
-                            <label className="label">前学年の偏差値:</label>
+                            <label className="label">現在の偏差値:</label>
                             <input 
                                 className="score-input"
                                 type="number" 
