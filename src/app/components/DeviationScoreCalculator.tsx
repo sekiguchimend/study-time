@@ -1,63 +1,114 @@
 "use client"
 import React, { useState, FormEvent, ChangeEvent } from 'react';
-
-type Grade = 1 | 2 | 3;
-
-const calculateAdjustedDeviationScore = (
-    currentGrade: Grade,
-    weekdayHours: number,
-    weekendHours: number,
-    previousScore: number,
-    firstYearScore: number | null = null
-): number => {
-    const baseDeviationScore = (grade: Grade, weekdayHours: number, weekendHours: number): number => {
-        const avgWeekday: { [key in Grade]: number } = { 1: 60, 2: 105, 3: 240 };
-        const avgWeekend: { [key in Grade]: number } = { 1: 120, 2: 240, 3: 420 };
-        const stdDev: { [key in Grade]: number } = { 1: 50, 2: 65, 3: 80 };
-        
-        const avgDaily = (avgWeekday[grade] * 5 + avgWeekend[grade] * 2) / 7;
-        const personalDaily = (weekdayHours * 60 * 5 + weekendHours * 60 * 2) / 7;
-        
-        return 50 + 10 * (personalDaily - avgDaily) / stdDev[grade];
-    };
-
-    const currentBaseScore = baseDeviationScore(currentGrade, weekdayHours, weekendHours);
-    let adjustment = (currentBaseScore - previousScore) * 0.3;
-    
-    if (currentGrade === 3 && firstYearScore !== null) {
-        const longTermAdjustment = (currentBaseScore - firstYearScore) * 0.1;
-        adjustment += longTermAdjustment;
-    }
-    
-    const finalScore = Math.max(30, Math.min(80, currentBaseScore - adjustment));
-    return Math.round(finalScore * 100) / 100;
-};
+import styles from './DeviationScoreCalculator.module.css';
 
 const DeviationScoreCalculator: React.FC = () => {
     const [currentGrade, setCurrentGrade] = useState<Grade>(2);
-    const [weekdayHours, setWeekdayHours] = useState<number>(2);
-    const [weekendHours, setWeekendHours] = useState<number>(8);
-    const [previousScore, setPreviousScore] = useState<number>(50);
-    const [firstYearScore, setFirstYearScore] = useState<number | null>(null);
-    const [result, setResult] = useState<number | null>(null);
+    const [weekdays, setWeekdays] = useState<{ [key in Subjects]: number }>({
+        国語: 2,
+        数学: 2,
+        理科: 2,
+        社会: 2,
+        英語: 2,
+    });
+    const [weekends, setWeekends] = useState<{ [key in Subjects]: number }>({
+        国語: 3,
+        数学: 3,
+        理科: 3,
+        社会: 3,
+        英語: 3,
+    });
+    const [previousScores, setPreviousScores] = useState<{ [key in Subjects]: number }>({
+        国語: 50,
+        数学: 50,
+        理科: 50,
+        社会: 50,
+        英語: 50,
+    });
+    const [firstYearScores, setFirstYearScores] = useState<{ [key in Subjects]: number | null }>({
+        国語: null,
+        数学: null,
+        理科: null,
+        社会: null,
+        英語: null,
+    });
+    const [results, setResults] = useState<{ [key in Subjects]: number | null }>({
+        国語: null,
+        数学: null,
+        理科: null,
+        社会: null,
+        英語: null,
+    });
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const score = calculateAdjustedDeviationScore(
-            currentGrade,
-            weekdayHours,
-            weekendHours,
-            previousScore,
-            currentGrade === 3 ? firstYearScore : null
-        );
-        setResult(score);
+        const newResults: { [key in Subjects]: number } = {
+            国語: calculateAdjustedDeviationScore(
+                currentGrade,
+                '国語',
+                weekdays['国語'],
+                weekends['国語'],
+                previousScores['国語'],
+                currentGrade === 3 ? firstYearScores['国語'] : null
+            ),
+            数学: calculateAdjustedDeviationScore(
+                currentGrade,
+                '数学',
+                weekdays['数学'],
+                weekends['数学'],
+                previousScores['数学'],
+                currentGrade === 3 ? firstYearScores['数学'] : null
+            ),
+            理科: calculateAdjustedDeviationScore(
+                currentGrade,
+                '理科',
+                weekdays['理科'],
+                weekends['理科'],
+                previousScores['理科'],
+                currentGrade === 3 ? firstYearScores['理科'] : null
+            ),
+            社会: calculateAdjustedDeviationScore(
+                currentGrade,
+                '社会',
+                weekdays['社会'],
+                weekends['社会'],
+                previousScores['社会'],
+                currentGrade === 3 ? firstYearScores['社会'] : null
+            ),
+            英語: calculateAdjustedDeviationScore(
+                currentGrade,
+                '英語',
+                weekdays['英語'],
+                weekends['英語'],
+                previousScores['英語'],
+                currentGrade === 3 ? firstYearScores['英語'] : null
+            ),
+        };
+        setResults(newResults);
+    };
+
+    const handleInputChange = (
+        e: ChangeEvent<HTMLInputElement>,
+        subject: Subjects,
+        type: 'weekday' | 'weekend' | 'previousScore' | 'firstYearScore'
+    ) => {
+        const value = Number(e.target.value);
+        if (type === 'weekday') {
+            setWeekdays({ ...weekdays, [subject]: value });
+        } else if (type === 'weekend') {
+            setWeekends({ ...weekends, [subject]: value });
+        } else if (type === 'previousScore') {
+            setPreviousScores({ ...previousScores, [subject]: value });
+        } else if (type === 'firstYearScore') {
+            setFirstYearScores({ ...firstYearScores, [subject]: value });
+        }
     };
 
     return (
-        <div>
-            <h2>偏差値計算機</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className={styles.container}>
+            <h2 className={styles.title}>五教科偏差値計算機</h2>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <div className={styles.gradeSelect}>
                     <label>
                         現在の学年:
                         <select 
@@ -70,57 +121,64 @@ const DeviationScoreCalculator: React.FC = () => {
                         </select>
                     </label>
                 </div>
-                <div>
-                    <label>
-                        平日の勉強時間（時間）:
-                        <input 
-                            type="number" 
-                            value={weekdayHours} 
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => setWeekdayHours(Number(e.target.value))} 
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        休日の勉強時間（時間）:
-                        <input 
-                            type="number" 
-                            value={weekendHours} 
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => setWeekendHours(Number(e.target.value))} 
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        前学年の偏差値:
-                        <input 
-                            type="number" 
-                            value={previousScore} 
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => setPreviousScore(Number(e.target.value))} 
-                            disabled={currentGrade === 1}
-                        />
-                    </label>
-                </div>
-                {currentGrade === 3 && (
-                    <div>
-                        <label>
-                            高校1年生時の偏差値:
-                            <input 
-                                type="number" 
-                                value={firstYearScore || ''} 
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => setFirstYearScore(Number(e.target.value))} 
-                            />
-                        </label>
+                {(['国語', '数学', '理科', '社会', '英語'] as Subjects[]).map((subject) => (
+                    <div key={subject} className={styles.subject}>
+                        <h3 className={styles.subjectTitle}>{subject}</h3>
+                        <div className={styles.subjectField}>
+                            <label>
+                                平日の勉強時間（時間）:
+                                <input 
+                                    type="number" 
+                                    value={weekdays[subject]} 
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e, subject, 'weekday')} 
+                                />
+                            </label>
+                        </div>
+                        <div className={styles.subjectField}>
+                            <label>
+                                休日の勉強時間（時間）:
+                                <input 
+                                    type="number" 
+                                    value={weekends[subject]} 
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e, subject, 'weekend')} 
+                                />
+                            </label>
+                        </div>
+                        <div className={styles.subjectField}>
+                            <label>
+                                前学年の偏差値:
+                                <input 
+                                    type="number" 
+                                    value={previousScores[subject]} 
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e, subject, 'previousScore')} 
+                                    disabled={currentGrade === 1}
+                                />
+                            </label>
+                        </div>
+                        {currentGrade === 3 && (
+                            <div className={styles.subjectField}>
+                                <label>
+                                    高校1年生時の偏差値:
+                                    <input 
+                                        type="number" 
+                                        value={firstYearScores[subject] || ''} 
+                                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e, subject, 'firstYearScore')}
+                                    />
+                                </label>
+                            </div>
+                        )}
                     </div>
-                )}
-                <button type="submit">計算</button>
+                ))}
+                <button type="submit" className={styles.calculateButton}>計算する</button>
             </form>
-            {result !== null && (
-                <div>
-                    <h3>結果</h3>
-                    <p>調整後の偏差値: {result}</p>
-                </div>
-            )}
+            <div className={styles.results}>
+                <h3>計算結果</h3>
+                {(['国語', '数学', '理科', '社会', '英語'] as Subjects[]).map((subject) => (
+                    <div key={subject} className={styles.result}>
+                        {subject}: {results[subject] !== null ? results[subject] : '---'}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
