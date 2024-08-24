@@ -69,18 +69,18 @@ const calculateAdjustedDeviationScore = (
 const DeviationScoreCalculator: React.FC = () => {
   const [currentGrade, setCurrentGrade] = useState<Grade>(2);
   const [weekdays, setWeekdays] = useState<{ [key in Subjects]: TimeInput }>({
-    国語: { hours: 2, minutes: 0 },
-    数学: { hours: 2, minutes: 0 },
-    理科: { hours: 2, minutes: 0 },
-    社会: { hours: 2, minutes: 0 },
-    英語: { hours: 2, minutes: 0 },
+    国語: { hours: 0, minutes: 0 },
+    数学: { hours: 0, minutes: 0 },
+    理科: { hours: 0, minutes: 0 },
+    社会: { hours: 0, minutes: 0 },
+    英語: { hours: 0, minutes: 0 },
   });
   const [weekends, setWeekends] = useState<{ [key in Subjects]: TimeInput }>({
-    国語: { hours: 3, minutes: 0 },
-    数学: { hours: 3, minutes: 0 },
-    理科: { hours: 3, minutes: 0 },
-    社会: { hours: 3, minutes: 0 },
-    英語: { hours: 3, minutes: 0 },
+    国語: { hours: 0, minutes: 0 },
+    数学: { hours: 0, minutes: 0 },
+    理科: { hours: 0, minutes: 0 },
+    社会: { hours: 0, minutes: 0 },
+    英語: { hours: 0, minutes: 0 },
   });
   const [previousScores, setPreviousScores] = useState<{
     [key in Subjects]: number;
@@ -181,10 +181,10 @@ const DeviationScoreCalculator: React.FC = () => {
 
   return (
     <div className="container">
-      <h2 className="title">未来の偏差値計算機</h2>
+      <h2 className="title">2~3か月後の偏差値</h2>
       <form className="form" onSubmit={handleSubmit}>
         <div className="grade-select">
-          <label htmlFor="grade">学年を選択：</label>
+          <label htmlFor="grade">現在の学年</label>
           <select
             id="grade"
             className="select"

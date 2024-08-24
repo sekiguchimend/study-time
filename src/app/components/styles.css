@@ -97,3 +97,19 @@
   .result-item {
     margin: 5px 0;
   }
+  .title {
+    font-size: 1.5em;
+    padding-left: 15px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #000000;
+  }
