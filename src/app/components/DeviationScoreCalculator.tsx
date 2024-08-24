@@ -272,7 +272,7 @@ const DeviationScoreCalculator: React.FC = () => {
       </form>
       {isCalculated && (
         <div className="result-section">
-          <h3 className="result-title">結果</h3>
+          <h3 className="result-title">計算結果</h3>
           {(['国語', '数学', '理科', '社会', '英語'] as Subjects[]).map(
             (subject) => (
               <p className="result-item" key={subject}>
