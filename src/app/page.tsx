@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta name="google-adsense-account" content="ca-pub-5463240386609584" />
+        <meta name="google-adsense-account" content="ca-pub-5463240386609584"></meta>
       </Head>
       <Container maxWidth="lg">
         <Grid container spacing={3}>
