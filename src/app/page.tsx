@@ -7,7 +7,11 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta name="google-adsense-account" content="ca-pub-5463240386609584"></meta>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5463240386609584"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
       <Container maxWidth="lg">
         <Grid container spacing={3}>
