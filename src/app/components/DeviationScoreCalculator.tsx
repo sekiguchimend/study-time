@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import './styles.css';
+import AffiliateBooks from './AffiliateBooks';
 
 type Grade = 1 | 2 | 3;
 type Subjects = '国語' | '数学' | '理科' | '社会' | '英語';
@@ -282,6 +283,7 @@ const DeviationScoreCalculator: React.FC = () => {
           )}
         </div>
       )}
+      {isCalculated && <AffiliateBooks previousScores={previousScores} />}
     </div>
   );
 };

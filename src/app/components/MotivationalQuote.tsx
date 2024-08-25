@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Typography, Box, Card, CardContent, CardActions } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -20,7 +20,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const quotes = [
     "「努力は必ず報われる。もし報われない努力があるのならば、それはまだ努力と呼べない。」 - 王貞治",
     "「天才とは99％の努力と1％のひらめきである。」 - トーマス・エジソン",
-    "「為せば成る」 - 上杉鷹山",
+     "「為せば成る」 - 上杉鷹山",
     "「志あるところに道は開ける」 - 中村天風",
     "「今日の成功で満足してはいけない。明日はさらに良い自分を目指せ。」 - 松下幸之助",
     "「学ぶことによって、希望を持つことを学ぶ。」 - 池田大作",
@@ -302,9 +302,17 @@ const quotes = [
 export default function MotivationalQuote() {
   const [quote, setQuote] = useState('');
 
-  const handleClick = () => {
+  const getRandomQuote = () => {
     const randomIndex = Math.floor(Math.random() * quotes.length);
-    setQuote(quotes[randomIndex]);
+    return quotes[randomIndex];
+  };
+
+  useEffect(() => {
+    setQuote(getRandomQuote());
+  }, []);
+
+  const handleClick = () => {
+    setQuote(getRandomQuote());
   };
 
   return (
@@ -320,10 +328,10 @@ export default function MotivationalQuote() {
         )}
       </CardContent>
       <CardActions>
-        <StyledButton 
-          variant="contained" 
-          color="primary" 
-          onClick={handleClick}
+        <StyledButton
+           variant="contained"
+           color="primary"
+           onClick={handleClick}
           fullWidth
         >
           新しい名言を表示

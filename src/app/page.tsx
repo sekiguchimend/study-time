@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import DeviationScoreCalculator from './components/DeviationScoreCalculator';
 import MotivationalQuote from './components/MotivationalQuote';
+import AffiliateBooks from './components/AffiliateBooks';
 import { Container, Grid } from '@mui/material';
 
 export default function Home() {
@@ -19,7 +20,14 @@ export default function Home() {
             <DeviationScoreCalculator />
           </Grid>
           <Grid item xs={12} md={5}>
-            <MotivationalQuote />
+            <Grid container direction="column" spacing={3}>
+              <Grid item>
+                <MotivationalQuote />
+              </Grid>
+              <Grid item>
+                <AffiliateBooks />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
