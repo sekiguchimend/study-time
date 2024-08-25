@@ -24,7 +24,15 @@ export default function Home() {
               <Grid item>
                 <MotivationalQuote />
               </Grid>
-              
+              <Grid item>
+              <AffiliateBooks previousScores={{
+    国語: 50,
+    数学: 50,
+    理科: 50,
+    社会: 50,
+    英語: 50,
+  }} />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
