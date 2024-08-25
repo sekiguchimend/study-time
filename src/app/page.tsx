@@ -24,9 +24,7 @@ export default function Home() {
               <Grid item>
                 <MotivationalQuote />
               </Grid>
-              <Grid item>
-                <AffiliateBooks />
-              </Grid>
+              
             </Grid>
           </Grid>
         </Grid>
