@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: '@HhUhh11306916', // あなたのTwitterハンドルを入れてください
     title: "偏差値予測計算機",
     description: "今の偏差値と勉強時間だけで未来の偏差値とオススメの参考書を提示してくれるサイト",
     images: ["https://study-time-32om.vercel.app/favicon.jpg"],
