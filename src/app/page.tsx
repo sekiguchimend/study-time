@@ -1,19 +1,19 @@
-import Head from 'next/head';
+import Script from 'next/script';
 import DeviationScoreCalculator from './components/DeviationScoreCalculator';
 import MotivationalQuote from './components/MotivationalQuote';
-import AffiliateBooks from './components/AffiliateBooks';
 import { Container, Grid } from '@mui/material';
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <>
-      <Head>
-        <script
+     
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5463240386609584"
           crossOrigin="anonymous"
-        ></script>
-      </Head>
+          strategy="lazyOnload"
+        />
+      
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={12} md={7}>
@@ -31,3 +31,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;
