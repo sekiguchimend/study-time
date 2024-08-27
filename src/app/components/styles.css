@@ -113,3 +113,9 @@
     width: 3px;
     background-color: #000000;
   }
+  @media screen and (max-width: 768px) {
+    .container{
+      width: 100%;
+      padding: 0;
+    }
+  }

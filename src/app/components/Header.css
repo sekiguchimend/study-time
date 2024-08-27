@@ -1,0 +1,70 @@
+.red-text {
+    color: #c5c5c5e7; /* これは赤色のHEXコードです。必要に応じて調整してください */
+  }
+header{
+    background-color: rgb(16, 202, 202);
+    border-radius: 50px;
+    width: fit-content;
+    display: flex;
+    padding: 16px;
+    align-items: flex-end; /* 要素を下揃えにする */
+    margin-top: 40px;
+    margin-left: 30px;
+    position: fixed; /* 固定位置に設定 */
+    z-index: 2;
+}
+h1{
+    font-size:2em;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: rgba(240, 248, 255, 0.903);
+    margin-left: 30px;
+}
+nav{
+ 
+}
+ul{
+    display: flex;
+    gap: 2em;
+    margin-left: 2em;
+}
+li{
+    color: rgba(240, 248, 255, 0.903);
+    font-weight: bold;
+    font-size: 1.5em;
+}
+@media screen and (max-width: 768px) {
+    header {
+      width: 60%;
+      padding: 10px;
+      border-radius: 25px;
+      margin: 20px auto;
+      margin-left: 10px;
+
+    }
+  
+    h1 {
+      font-size: 1.5em;
+      margin-left: 0;
+      align-items: end;
+    }
+  
+    nav {
+      width: 100%;
+    }
+  
+    ul {
+      gap: 0.5em;
+      margin-left: 20px;
+      padding: 0;
+    }
+  
+    li a{
+      display: none;
+    }
+  
+    .MuiSvgIcon-root {
+    
+      font-size: 1.5em !important;
+    }
+  }
