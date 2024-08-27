@@ -208,23 +208,25 @@ const DeviationScoreCalculator: React.FC = () => {
                 <input
                   className="time-input"
                   type="number"
-                  value={weekdays[subject].hours}
+                  value={weekdays[subject].hours || ''}
                   onChange={(e) =>
                     handleTimeInputChange(e, subject, 'weekday', 'hours')
                   }
                   min="0"
                   max="24"
+                  placeholder="0"
                 />
                 時間
                 <input
                   className="time-input"
                   type="number"
-                  value={weekdays[subject].minutes}
+                  value={weekdays[subject].minutes || ''}
                   onChange={(e) =>
                     handleTimeInputChange(e, subject, 'weekday', 'minutes')
                   }
                   min="0"
                   max="59"
+                  placeholder="0"
                 />
                 分
               </div>
@@ -233,23 +235,25 @@ const DeviationScoreCalculator: React.FC = () => {
                 <input
                   className="time-input"
                   type="number"
-                  value={weekends[subject].hours}
+                  value={weekends[subject].hours || ''}
                   onChange={(e) =>
                     handleTimeInputChange(e, subject, 'weekend', 'hours')
                   }
                   min="0"
                   max="24"
+                  placeholder="0"
                 />
                 時間
                 <input
                   className="time-input"
                   type="number"
-                  value={weekends[subject].minutes}
+                  value={weekends[subject].minutes || ''}
                   onChange={(e) =>
                     handleTimeInputChange(e, subject, 'weekend', 'minutes')
                   }
                   min="0"
                   max="59"
+                  placeholder="0"
                 />
                 分
               </div>
@@ -258,10 +262,11 @@ const DeviationScoreCalculator: React.FC = () => {
                 <input
                   className="score-input"
                   type="number"
-                  value={previousScores[subject]}
+                  value={previousScores[subject] || ''}
                   onChange={(e) => handlePreviousScoreChange(e, subject)}
                   min="0"
                   max="100"
+                  placeholder="0"
                 />
               </div>
             </div>

@@ -4,7 +4,6 @@ import MotivationalQuote from './components/MotivationalQuote';
 import { Container, Grid } from '@mui/material';
 import Header from './components/Header';
 import styles from './Home.module.css'; // CSSモジュールを使用
-
 const Home: React.FC = () => {
   return (
     <>

@@ -1,0 +1,47 @@
+/* src/app/Brain/Brain.module.css */
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.h1{
+  color: rgb(75, 75, 75);
+}
+.spacer {
+  height: 120px; /* ヘッダーの高さに応じて調整 */
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.button {
+  padding: 10px 15px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #005bb5;
+}
+
+.result {
+  margin-top: 20px;
+}

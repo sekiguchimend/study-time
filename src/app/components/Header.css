@@ -33,7 +33,7 @@ li{
     font-weight: bold;
     font-size: 1.5em;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 500px) {
     header {
       width: 60%;
       padding: 10px;
@@ -58,13 +58,12 @@ li{
       margin-left: 20px;
       padding: 0;
     }
-  
-    li a{
+    .MuiSvgIcon-root {
+      font-size: 1.5em !important;
+    }
+    .con {
       display: none;
     }
   
-    .MuiSvgIcon-root {
-    
-      font-size: 1.5em !important;
-    }
+   
   }
